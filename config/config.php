@@ -6,10 +6,15 @@
 // }
 
 try{
-define("HOST", "localhost");
-define("DBNAME", "freshcery");
-define('USERNAME', 'root');
-define('PASSWORD', '');
+
+ 
+if(!defined('HOST'))  define("HOST", "localhost");
+
+if(!defined('DBNAME')) define("DBNAME", "freshcery");
+ 
+if(!defined('USERNAME')) define("USERNAME", "root"); 
+ 
+if(!defined('PASSWORD')) define("PASSWORD", "");
 
 $conn = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8",USERNAME,PASSWORD);
 $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

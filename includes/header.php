@@ -3,7 +3,20 @@
 session_start();
 
 
-define("APPURL","http://localhost/Freshcery"); ?>
+define("APPURL","http://localhost/Freshcery");
+
+require dirname(dirname(__FILE__)) . "../config/config.php";
+
+$cart = $conn->query("SELECT COUNT(*) as num_products FROM cart WHERE user_id='$_SESSION[user_id]'");
+$cart->execute();
+
+$num = $cart->fetch(PDO::FETCH_OBJ);
+
+
+
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +44,7 @@ define("APPURL","http://localhost/Freshcery"); ?>
         <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-transparent" id="page-navigation">
             <div class="container">
                 <!-- Navbar Brand -->
-                <a href="index.html" class="navbar-brand">
+                <a href="<?php echo APPURL; ?>" class="navbar-brand">
                     <img src="<?php echo APPURL; ?>/assets/img/logo/logo.png" alt="">
                 </a>
 
@@ -73,8 +86,8 @@ define("APPURL","http://localhost/Freshcery"); ?>
                             </div>
                           </li>
                         <li class="nav-item">
-                            <a href="cart.html" class="nav-link" data-toggle="" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary">5</span>
+                            <a href="<?php echo APPURL; ?>/products/cart.php" class="nav-link" data-toggle="" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary"><?php echo $num->num_products; ?></span>
                             </a>
                           
                         </li>
